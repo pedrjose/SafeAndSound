@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import {
-  getWalletRepository,
+  getWalletRepositoryForVerify,
   updateWalletRepository,
 } from "../repository/wallet.repository.js";
 
@@ -19,13 +19,17 @@ export async function mineBlock(block) {
     );
 
     if (block.hash.startsWith("0".repeat(4))) {
-      const minerWallet = await getWalletRepository(block.minerRecord.miner);
-      const payerWallet = await getWalletRepository(
+      const minerWallet = await getWalletRepositoryForVerify(
+        block.minerRecord.miner
+      );
+      const payerWallet = await getWalletRepositoryForVerify(
         block.transaction.publicAddress
       );
 
       if (payerWallet.balance < 1) {
-        throw new Error("Saldo insuficiente para realizar a transação.");
+        throw new Error({
+          message: "Saldo insuficiente para realizar a transação.",
+        });
       }
 
       payerWallet.balance -= 1;

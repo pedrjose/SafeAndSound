@@ -11,9 +11,10 @@ import {
 
 export async function generateWalletService(privateKey) {
   if (!privateKey)
-    throw new Error(
-      "Não é possível criar uma SND Wallet sem chave privada. Tente novamente!"
-    );
+    throw new Error({
+      message:
+        "Não é possível criar uma SND Wallet sem chave privada. Tente novamente!",
+    });
 
   const newWallet = {
     privateKey: encryptPrivateKey(privateKey),
@@ -27,7 +28,8 @@ export async function generateWalletService(privateKey) {
   return {
     message: `SND Wallet foi criada com sucesso!`,
     details: {
-      publicAddress: `Sua chave pública corresponde ao endereço '${newWallet.publicAddress}'.`,
+      publicKey: newWallet.publicAddress,
+      publicAddressMessage: `Sua chave pública corresponde ao endereço '${newWallet.publicAddress}'.`,
       securityPhrase: `Sua frase de segurança é: ${newWallet.securityPhrase
         .map((word) => word)
         .join(", ")}.`,

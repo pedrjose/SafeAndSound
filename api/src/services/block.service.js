@@ -1,5 +1,5 @@
 import { formatDate } from "../helpers/block.helpers.js";
-import { getWalletRepository } from "../repository/wallet.repository.js";
+import { getWalletRepositoryForVerify } from "../repository/wallet.repository.js";
 import { validatePrivateKey } from "../helpers/wallet.helper.js";
 import { createBlockRepository } from "../repository/block.repository.js";
 import { BlockchainNode } from "../models/block.model.js";
@@ -24,21 +24,27 @@ export async function createBlockService(
     });
   }
 
-  const wallet = await getWalletRepository(publicAddress);
+  const wallet = await getWalletRepositoryForVerify(publicAddress);
   if (!wallet) {
-    throw new Error(
-      "ERRO: não foi encontrado nenhuma chave pública relativa ao endereço informado."
-    );
+    throw new Error({
+      message:
+        "ERRO: não foi encontrado nenhuma chave pública relativa ao endereço informado.",
+    });
   }
 
   if (wallet.balance < 1) {
-    throw new Error(
-      "ERRO: seu saldo é insuficiente para pagar as taxas de transação da Blockchain. Minere blocos para conseguir mais SND!"
-    );
+    throw new Error({
+      message:
+        "ERRO: seu saldo é insuficiente para pagar as taxas de transação da Blockchain. Minere blocos para conseguir mais SND!",
+    });
   }
+  
+  const verify = await validatePrivateKey(wallet.privateKey, privateKey);
 
-  if (!validatePrivateKey(wallet.privateKey, privateKey)) {
-    throw new Error("ERRO: assinatura de chave privada incorreta.");
+  if (!verify) {
+    throw new Error({
+      message: "ERRO: assinatura de chave privada incorreta.",
+    });
   }
 
   const transaction = {

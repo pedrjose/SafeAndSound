@@ -1,6 +1,7 @@
 import express from "express";
 import connectDatabase from "./database/db.js";
 import { Blockchain } from "./models/blockchain.model.js";
+import { corsAuth } from "./middleware/cors.middleware.js";
 
 import walletRoute from "./routes/wallet.route.js";
 import blockRoute from "./routes/block.routes.js";
@@ -16,10 +17,10 @@ export const blockchain = new Blockchain();
 
 app.use(express.json());
 
-app.use("/wallet", walletRoute);
-app.use("/block", blockRoute);
-app.use("/mine", mineRoute);
-app.use("/blockchain", blockchainRoute);
+app.use("/wallet", corsAuth, walletRoute);
+app.use("/block", corsAuth, blockRoute);
+app.use("/mine", corsAuth, mineRoute);
+app.use("/blockchain", corsAuth, blockchainRoute);
 
 app.listen(PORT, () => {
   console.log(

@@ -13,13 +13,13 @@ Blockchain.prototype.validateAndAddBlockToChain = function (block) {
     block.prevHash = 0;
     block.hash = mineBlock(block);
     this.block = block;
-    return;
+    return block.hash;
   } else {
     if (!this.block.next) {
       block.prevHash = this.block.hash;
       block.hash = mineBlock(block);
       this.block.next = block;
-      return;
+      return block.hash;
     } else {
       while (currentBlock) {
         if (!currentBlock.prevHash || currentBlock.prevHash === 0) {
@@ -45,6 +45,8 @@ Blockchain.prototype.validateAndAddBlockToChain = function (block) {
       block.prevHash = previousBlock.hash;
       block.hash = mineBlock(block);
       previousBlock.next = block;
+
+      return block.hash;
     }
   }
 };

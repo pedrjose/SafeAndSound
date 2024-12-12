@@ -3,12 +3,18 @@ import {
   validateBlockRepository,
   deleteCacheBlock,
 } from "../repository/mine.repository.js";
+import { getWalletRepositoryForVerify } from "../repository/wallet.repository.js";
 
 export async function validateBlockService(minerWallet) {
   if (!minerWallet)
-    throw new Error(
-      "Informe sua chave pública ou caso contrário, você não será remunerado pela sua mineração."
-    );
+    throw new Error({
+      message:
+        "Informe sua chave pública ou caso contrário, você não será remunerado pela sua mineração.",
+    });
+
+  const findWalletMiner = await getWalletRepositoryForVerify(minerWallet);
+
+  if (!findWalletMiner) throw new Error("ERRO: endereço de carteira inválida.");
 
   const getBlocks = await validateBlockRepository();
 
@@ -22,9 +28,11 @@ export async function validateBlockService(minerWallet) {
     tax: "1 SND",
   };
 
-  blockchain.validateAndAddBlockToChain(block);
+  const minedBlockHash = blockchain.validateAndAddBlockToChain(block);
 
   await deleteCacheBlock(block._id);
 
-  return blockchain;
+  return {
+    message: `Bloco '${minedBlockHash}' minerado com sucesso. Foi pago o valor de 1 SND para sua carteira pelo seu trabalho!`,
+  };
 }
