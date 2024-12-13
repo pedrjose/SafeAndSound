@@ -10,11 +10,12 @@ import {
 } from "../helpers/wallet.helper.js";
 
 export async function generateWalletService(privateKey) {
-  if (!privateKey)
+  if (!privateKey) {
     throw new Error({
       message:
         "Não é possível criar uma SND Wallet sem chave privada. Tente novamente!",
     });
+  }
 
   const newWallet = {
     privateKey: encryptPrivateKey(privateKey),
@@ -30,20 +31,20 @@ export async function generateWalletService(privateKey) {
     details: {
       publicKey: newWallet.publicAddress,
       publicAddressMessage: `Sua chave pública corresponde ao endereço '${newWallet.publicAddress}'.`,
-      securityPhrase: `Sua frase de segurança é: ${newWallet.securityPhrase
-        .map((word) => word)
-        .join(", ")}.`,
+      securityPhrase: `Sua frase de segurança é: ${newWallet.securityPhrase.join(
+        ", "
+      )}.`,
       balance: `Você ganhou ${newWallet.balance} SND para começar na plataforma.`,
     },
   };
 }
 
 export async function getWalletTransactionHistoryService(publicAddress) {
-  if (!publicAddress)
+  if (!publicAddress) {
     throw new Error("Não é possível localizar essa carteira.");
+  }
 
   const wallet = await getWalletRepository(publicAddress);
-
   const history = blockchain.getWalletTransactionHistory(publicAddress);
 
   return { wallet, history };

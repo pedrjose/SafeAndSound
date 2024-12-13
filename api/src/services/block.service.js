@@ -15,9 +15,7 @@ export async function createBlockService(
   privateKey
 ) {
   if (!title || !author || !description) {
-    throw new Error({
-      message: "ERRO: preencha todos os campos necessários.",
-    });
+    throw new Error({ message: "ERRO: preencha todos os campos necessários." });
   }
 
   if (!publicAddress || !privateKey) {

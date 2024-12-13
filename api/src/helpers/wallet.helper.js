@@ -3,9 +3,7 @@ import crypto from "crypto";
 export function generateWalletPublicAddress() {
   const now = new Date();
   const timestamp = now.toISOString();
-
   const randomString = Math.random().toString(36).substring(2, 15);
-
   const dataToHash = `${timestamp}-${randomString}`;
 
   const hash = crypto.createHash("sha256").update(dataToHash).digest("hex");
@@ -448,6 +446,7 @@ export function generateWalletSecurityPhrase() {
   ];
 
   const selectedWords = [];
+
   while (selectedWords.length < 12) {
     const randomIndex = Math.floor(Math.random() * wordList.length);
     const randomWord = wordList[randomIndex];

@@ -18,7 +18,7 @@ export async function mineBlock(block) {
       block.prevHash
     );
 
-    if (block.hash.startsWith("0".repeat(4))) {
+    if (block.hash.startsWith("0000")) {
       const minerWallet = await getWalletRepositoryForVerify(
         block.minerRecord.miner
       );
@@ -46,7 +46,7 @@ export async function mineBlock(block) {
 }
 
 export function avoidForks(block) {
-  return !block.next ? true : false;
+  return !block.next;
 }
 
 export function generateHash(...inputs) {

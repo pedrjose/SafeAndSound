@@ -7,11 +7,12 @@ export function Blockchain(block) {
 }
 
 Blockchain.prototype.validateAndAddBlockToChain = function (block) {
-  if (!avoidForks(block))
+  if (!avoidForks(block)) {
     throw new Error({
       message:
         "Essa transação possui risco de gerar uma bifurcação na blockchain, por isso, bloqueamos ela para manter o consenso da rede.",
     });
+  }
 
   let currentBlock = this.block;
   let previousBlock = null;

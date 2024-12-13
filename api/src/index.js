@@ -23,7 +23,5 @@ app.use("/mine", corsAuth, mineRoute);
 app.use("/blockchain", corsAuth, blockchainRoute);
 
 app.listen(PORT, () => {
-  console.log(
-    `\nTHE 'SAFE & SOUND' BLOCKCHAIN NETWORK IS RUNNING ON PORT ${PORT}!`
-  );
+  console.log(`\nTHE 'SAFE & SOUND' BLOCKCHAIN NETWORK IS RUNNING ON PORT ${PORT}!`);
 });

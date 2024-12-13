@@ -1,8 +1,7 @@
 import { Router } from "express";
+import { createBlockController } from "../controllers/block.controller.js";
 
 const router = Router();
-
-import { createBlockController } from "../controllers/block.controller.js";
 
 router.post("/create-block", createBlockController);
 

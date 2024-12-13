@@ -1,8 +1,7 @@
 import { Router } from "express";
+import { validateBlockController } from "../controllers/mine.controller.js";
 
 const router = Router();
-
-import { validateBlockController } from "../controllers/mine.controller.js";
 
 router.patch("/validate-block", validateBlockController);
 

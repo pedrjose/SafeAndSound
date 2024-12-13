@@ -1,11 +1,10 @@
 import { Router } from "express";
-
-const router = Router();
-
 import {
   generateWalletController,
   getWalletTransactionHistoryController,
 } from "../controllers/wallet.controller.js";
+
+const router = Router();
 
 router.post("/generate-wallet", generateWalletController);
 router.post("/history", getWalletTransactionHistoryController);

@@ -1,8 +1,7 @@
 import { Router } from "express";
+import { blockchainHistoryController } from "../controllers/blockchain.controller.js";
 
 const router = Router();
-
-import { blockchainHistoryController } from "../controllers/blockchain.controller.js";
 
 router.get("/history", blockchainHistoryController);
 
