@@ -33,7 +33,7 @@ export async function mineBlock(block) {
       }
 
       payerWallet.balance -= 1;
-      minerWallet.balance += 1;
+      minerWallet.balance += 2;
 
       await updateWalletRepository(payerWallet.publicAddress, payerWallet);
       await updateWalletRepository(minerWallet.publicAddress, minerWallet);
@@ -43,6 +43,10 @@ export async function mineBlock(block) {
 
     block.nonce += 1;
   }
+}
+
+export function avoidForks(block) {
+  return !block.next ? true : false;
 }
 
 export function generateHash(...inputs) {

@@ -1,5 +1,5 @@
 import "./Pages.css";
-import { Navbar } from "./Components.jsx";
+import { Navbar, Navbar2 } from "./Components.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Components.css";
@@ -14,10 +14,14 @@ const blockchainUrl = "http://localhost:3000";
 export function HomePage() {
   const navigate = useNavigate();
   const { publicAddress } = useParams();
-  const [walletData, setWalletData] = useState();
+  const [walletData, setWalletData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const find = async (publicAddress) => {
     try {
+      setIsLoading(true);
+      setErrorMessage(null);
       const response = await axios.post(
         `${blockchainUrl}/wallet/history`,
         { publicAddress },
@@ -27,29 +31,48 @@ export function HomePage() {
           },
         }
       );
-
       setWalletData(response.data);
     } catch (error) {
-      alert(error.response?.data?.message || "Erro desconhecido.");
+      setErrorMessage(
+        error.response?.data?.message || "Erro ao carregar dados."
+      );
+      setWalletData(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     find(publicAddress);
   }, []);
+
   return (
     <>
       <Navbar />
       <section className="page-settings">
-        <div className="wallet-balance">
-          <h1>
-            {walletData ? walletData.wallet.balance : null}.00{" "}
-            <b>
-              SND<i>s</i>
-            </b>
-          </h1>
-          <h6>{walletData ? walletData.wallet.publicAddress : null}</h6>
-        </div>
+        {isLoading ? (
+          <p>Carregando...</p>
+        ) : errorMessage ? (
+          <div className="error-message">
+            <p>{errorMessage}</p>
+          </div>
+        ) : walletData && walletData.wallet ? (
+          <div className="wallet-balance">
+            <h1>
+              {walletData.wallet.balance || 0}.00{" "}
+              <b>
+                SND<i>s</i>
+              </b>
+            </h1>
+            <h6>
+              {walletData.wallet.publicAddress || "Endereço não disponível"}
+            </h6>
+          </div>
+        ) : (
+          <div className="wallet-balance">
+            <p>Endereço de carteira inválida.</p>
+          </div>
+        )}
         <button className="button" onClick={() => navigate("/gerar-bloco")}>
           Criar um bloco
         </button>
@@ -59,7 +82,12 @@ export function HomePage() {
         <button className="button" onClick={() => navigate("/buscar-carteira")}>
           Visão geral da carteira
         </button>
-        <button className="button">Acessar blockchain</button>
+        <button
+          className="button"
+          onClick={() => navigate("/visualizar-blockchain")}
+        >
+          Acessar blockchain
+        </button>
         <img className="logo-settings" src={logo} />
       </section>
     </>
@@ -367,6 +395,89 @@ export function WalletOverviewPage() {
             </tbody>
           </table>
         </div>
+      </section>
+    </>
+  );
+}
+
+export function BlockchainOverviewPage() {
+  const [blockchain, setBlockchain] = useState();
+
+  const getBlockchain = async () => {
+    try {
+      const response = await axios.get(`${blockchainUrl}/blockchain/history`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setBlockchain(response.data);
+    } catch (error) {
+      alert(error.response?.data?.message || "Erro desconhecido.");
+    }
+  };
+
+  useEffect(() => {
+    getBlockchain();
+  }, []);
+
+  const renderBlockchain = () => {
+    if (!blockchain || !blockchain.block) {
+      return <p>Não é possível resgatar os dados da blockchain.</p>;
+    }
+
+    const blocks = [];
+    let currentBlock = blockchain.block;
+
+    while (currentBlock) {
+      blocks.push(
+        <div className="block" key={currentBlock.hash}>
+          <div className="block-header">
+            <h3>{currentBlock.transaction.title}</h3>
+            <p>Autor: {currentBlock.transaction.author}</p>
+          </div>
+          <div className="block-body">
+            <p>
+              <strong>Descrição:</strong> {currentBlock.transaction.description}
+            </p>
+            <p>
+              <strong>Endereço Público:</strong>{" "}
+              {currentBlock.transaction.publicAddress}
+            </p>
+            <p>
+              <strong>Criado em:</strong> {currentBlock.transaction.createdAt}
+            </p>
+          </div>
+          <div className="block-footer">
+            <p>
+              <strong>Hash Anterior:</strong> {currentBlock.prevHash}
+            </p>
+            <p>
+              <strong>Nonce:</strong> {currentBlock.nonce}
+            </p>
+            <p>
+              <strong>Hash:</strong> {currentBlock.hash}
+            </p>
+            <p>
+              <strong>Minerador:</strong> {currentBlock.minerRecord.miner}
+            </p>
+            <p>
+              <strong>Taxa:</strong> {currentBlock.minerRecord.tax}
+            </p>
+          </div>
+          {currentBlock.next && <div className="link">↳</div>}
+        </div>
+      );
+      currentBlock = currentBlock.next;
+    }
+
+    return blocks;
+  };
+
+  return (
+    <>
+      <section className="page-settings">
+        <div className="blockchain-viewer">{renderBlockchain()}</div>
       </section>
     </>
   );

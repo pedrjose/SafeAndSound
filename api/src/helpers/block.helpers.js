@@ -17,7 +17,5 @@ export function validateWalletAddress(string) {
 }
 
 export async function validateWalletBalance(privateKey, privateKeyHash) {
-  if (privateKeyHash === encryptPrivateKey(privateKey)) return true;
-
-  return false;
+  privateKeyHash === encryptPrivateKey(privateKey) ? true : false;
 }

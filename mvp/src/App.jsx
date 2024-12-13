@@ -8,6 +8,7 @@ import {
   MineBlockPage,
   FindWalletPage,
   WalletOverviewPage,
+  BlockchainOverviewPage,
 } from "./Pages.jsx";
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
           <Route path="/gerar-bloco" element={<GenerateBlockPage />} />
           <Route path="/minerar-bloco" element={<MineBlockPage />} />
           <Route path="/buscar-carteira" element={<FindWalletPage />} />
+          <Route
+            path="/visualizar-blockchain"
+            element={<BlockchainOverviewPage />}
+          />
           <Route
             path="/wallet-overview/:publicAddress"
             element={<WalletOverviewPage />}

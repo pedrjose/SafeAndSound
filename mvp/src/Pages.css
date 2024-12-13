@@ -11,3 +11,63 @@
     color: #e9efec;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;;
 }
+
+.blockchain-viewer {
+    height: 100vh;
+    color: #211e20;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .block {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 90%;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .block-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .block-body p,
+  .block-footer p {
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+  
+  .block-footer {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 0.85em;
+    color: #555;
+  }
+  
+  .link {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 1.5em;
+    color: #666;
+  }
+  
+  @media (max-width: 768px) {
+    .block {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .block-header h3 {
+      font-size: 1em;
+    }
+  }

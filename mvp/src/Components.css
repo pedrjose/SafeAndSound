@@ -1,174 +1,175 @@
 .navbar-settings {
-    z-index: 1;
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 6rem;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    max-width: 100%;
-    background-color: #555568;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  z-index: 1;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6rem;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100%;
+  background-color: #555568;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .logo-settings {
-    height: 2.5rem;
+  height: 2.5rem;
 }
 
 .button {
-    display: inline-block;
-    outline: 0;
-    text-align: center;
-    cursor: pointer;
-    height: 34px;
-    width: 13rem;
-    padding: 0 13px;
-    vertical-align: top;
-    border-radius: 3px;
-    border: 1px solid transparent;
-    transition: all .3s ease;
-    background-color: #e9efec;
-    border-color: #e8e8e8;
-    color: #000;
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 16px;
-    font-size: 11px;
-}
-
-.button:hover {
-    background-color: #555568;
-    border-color: #211e20;
-    color: #e9efec;
-}
-
-.form{
-    padding: 5px 12px;
-    font-size: 14px;
-    line-height: 20px;
-    width: 13rem;
-    color: #24292e;
-    vertical-align: middle;
-    background-color: #ffffff;
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    border: 1px solid #e1e4e8;
-    border-radius: 6px;
-    outline: none;
-    box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
-}
-
-.create-wallet {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.wallet-balance {
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-    flex-direction: column;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 13rem;
-    height: 5rem;
-    border-radius: 15px;
-    color: #555568;
-    background-color: #e9efec;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-}
-
-.transaction-history table {
-    width: 100%;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-  }
-  
-  .transaction-history th, .transaction-history td {
-    padding: 12px 15px;
-    border: 1px solid #e9efec;
-    text-align: left;
-  }
-  
-  
-  .transaction-history th {
-    background-color: #555568; 
-    color: white; 
-  }
-  
-
-  .transaction-history tr:nth-child(even) {
-    background-color: #e9efec; 
-  }
-  
-  .transaction-history tr:nth-child(odd) {
-    background-color: #e9efec; 
-  }
-  
-  .transaction-history tr:hover {
-    background-color: #ddd; 
-  }
-  
-  .transaction-history h2 {
-    color: #e9efec; 
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-.find-wallet {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction:row;
-  gap: .2rem;
-}
-
-.navbar-button {
   display: inline-block;
   outline: 0;
   text-align: center;
   cursor: pointer;
-  height: 36px;
-  width: 5rem;
+  height: 34px;
+  width: 13rem;
   padding: 0 13px;
   vertical-align: top;
   border-radius: 3px;
   border: 1px solid transparent;
   transition: all .3s ease;
-  background-color: #e8e8e8;
-  border-color: #211e20;
-  color: #211e20;
+  background-color: #e9efec;
+  border-color: #e8e8e8;
+  color: #000;
   font-weight: 600;
   text-transform: uppercase;
   line-height: 16px;
   font-size: 11px;
 }
 
+.button:hover {
+  background-color: #555568;
+  border-color: #211e20;
+  color: #e9efec;
+}
+
+.form{
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  width: 13rem;
+  color: #24292e;
+  vertical-align: middle;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+}
+
+.create-wallet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wallet-balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;   
+  flex-direction: column;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 13rem;
+  height: 5rem;
+  border-radius: 15px;
+  color: #555568;
+  background-color: #e9efec;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.transaction-history table {
+  color: #555568;
+  width: 100%;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.transaction-history th, .transaction-history td {
+  padding: 12px 15px;
+  border: 1px solid #e9efec;
+  text-align: left;
+}
+
+
+.transaction-history th {
+  background-color: #555568; 
+  color: white; 
+}
+
+
+.transaction-history tr:nth-child(even) {
+  background-color: #e9efec; 
+}
+
+.transaction-history tr:nth-child(odd) {
+  background-color: #e9efec; 
+}
+
+.transaction-history tr:hover {
+  background-color: #ddd; 
+}
+
+.transaction-history h2 {
+  color: #555568; 
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.find-wallet {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction:row;
+gap: .2rem;
+}
+
+.navbar-button {
+display: inline-block;
+outline: 0;
+text-align: center;
+cursor: pointer;
+height: 36px;
+width: 5rem;
+padding: 0 13px;
+vertical-align: top;
+border-radius: 3px;
+border: 1px solid transparent;
+transition: all .3s ease;
+background-color: #e8e8e8;
+border-color: #211e20;
+color: #211e20;
+font-weight: 600;
+text-transform: uppercase;
+line-height: 16px;
+font-size: 11px;
+}
+
 .navbar-button:hover {
-  background-color: #a0a08b;
-  
+background-color: #a0a08b;
+
 }
 
 .navbar-form {
-  
-  font-size: 14px;
-  border-radius: 6px;
-  line-height: 1.5;
-  padding: 5px 10px;
-  transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
-  border: 2px solid #dee1e2;
-  color: rgb(14, 14, 16);
-  background: #e8e8e8;
-  display: block;
-  height: 22px; 
+
+font-size: 14px;
+border-radius: 6px;
+line-height: 1.5;
+padding: 5px 10px;
+transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+border: 2px solid #dee1e2;
+color: rgb(14, 14, 16);
+background: #e8e8e8;
+display: block;
+height: 22px; 
 }
 
 .navbar-form:hover {
-  border-color: #ccc;
+border-color: #ccc;
 }

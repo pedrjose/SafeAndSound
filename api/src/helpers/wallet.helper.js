@@ -465,9 +465,5 @@ export function encryptPrivateKey(privateKey) {
 }
 
 export async function validatePrivateKey(privateKeyHash, privateKey) {
-  if (privateKeyHash !== encryptPrivateKey(privateKey)) {
-    return false;
-  } else {
-    return true;
-  }
+  return privateKeyHash !== encryptPrivateKey(privateKey) ? false : true;
 }

@@ -1,5 +1,8 @@
 import { formatDate } from "../helpers/block.helpers.js";
-import { getWalletRepositoryForVerify } from "../repository/wallet.repository.js";
+import {
+  getWalletRepositoryForVerify,
+  updateWalletRepository,
+} from "../repository/wallet.repository.js";
 import { validatePrivateKey } from "../helpers/wallet.helper.js";
 import { createBlockRepository } from "../repository/block.repository.js";
 import { BlockchainNode } from "../models/block.model.js";
@@ -25,6 +28,7 @@ export async function createBlockService(
   }
 
   const wallet = await getWalletRepositoryForVerify(publicAddress);
+
   if (!wallet) {
     throw new Error({
       message:
@@ -38,7 +42,7 @@ export async function createBlockService(
         "ERRO: seu saldo é insuficiente para pagar as taxas de transação da Blockchain. Minere blocos para conseguir mais SND!",
     });
   }
-  
+
   const verify = await validatePrivateKey(wallet.privateKey, privateKey);
 
   if (!verify) {
@@ -46,6 +50,9 @@ export async function createBlockService(
       message: "ERRO: assinatura de chave privada incorreta.",
     });
   }
+
+  wallet.balance -= 1;
+  await updateWalletRepository(publicAddress, wallet);
 
   const transaction = {
     title,
